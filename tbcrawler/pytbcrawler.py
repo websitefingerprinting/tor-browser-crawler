@@ -133,7 +133,7 @@ def parse_arguments():
     # List of urls to be crawled
     parser.add_argument('-u', '--url-file', required=True,
                         help='Path to the file that contains the list of site URLs to crawl.',
-                        default=cm.site_LIST)
+                        default=cm.SITE_LIST)
     parser.add_argument('-o', '--output',
                         help='Directory to dump the results (default=./results).',
                         default=cm.CRAWL_DIR)
