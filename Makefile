@@ -25,7 +25,7 @@ VOLUMES = \
 
 
 # network interface on which to listen
-DEVICE=ens33
+DEVICE=eth0
 
 # commandline arguments
 CRAWL_PARAMS=-c wang_and_goldberg -u ./sites.txt -s -v
@@ -35,11 +35,11 @@ build:
 	@docker build -t tbcrawl --rm .
 
 run:
-	@docker run -it --rm ${ENV_VARS} ${VOLUMES} --net host --privileged \
+	@docker run -it --rm ${ENV_VARS} ${VOLUMES} --net bridge --privileged \
 	tbcrawl ${CRAWL_PATH}/Entrypoint.sh "./bin/tbcrawler.py $(CRAWL_PARAMS)" ${DEVICE}
 
 shell:
-	@docker run -it --rm ${ENV_VARS} ${VOLUMES} --net host --privileged \
+	@docker run -it --rm ${ENV_VARS} ${VOLUMES} --net bridge --privileged \
 	tbcrawl /bin/bash
 
 stop:
