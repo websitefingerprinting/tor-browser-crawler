@@ -21,7 +21,7 @@ import tbcrawler.crawler as crawler_mod
 from tbcrawler.log import add_log_file_handler
 from tbcrawler.log import wl_log, add_symlink
 from tbcrawler.torcontroller import TorController
-
+from tbcrawler.utils import sendmail
 
 def run():
     # Parse arguments
@@ -220,4 +220,12 @@ class TorBrowserWrapper(object):
 
 
 if __name__ == '__main__':
-    run()
+    try:
+        run()
+        msg = "'Crawler Message:Crawl done at {}!'".format(datetime.datetime.now())
+        sendmail(msg)
+    except KeyboardInterrupt:
+        sys.exit(-1)
+    except Exception as e:
+        msg = "'Crawler Message: An error occurred:\n{}'".format(e)
+        sendmail(msg)
