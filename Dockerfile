@@ -6,13 +6,15 @@ FROM python:3.6
 
 # Install required packages.
 RUN apt-get update
-RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install sudo build-essential autoconf git zip unzip xz-utils
-RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install libtool libevent-dev libssl-dev
-RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install python python-dev python-setuptools python-pip
+RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install sudo build-essential autoconf git zip unzip xz-utils apt-utils psmisc
+RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install firefox-esr
+RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install libtool libevent-dev libssl-dev zlib1g zlib1g-dev
+RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install python3 python3-dev python3-setuptools python3-pip
 RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install net-tools ethtool tshark libpcap-dev iw tcpdump
-RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install xvfb firefox-esr
+RUN DEBIAN_FRONTEND=noninteractive apt-get --assume-yes --yes install xvfb x11-utils
 RUN apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
+
 
 # Install python requirements.
 RUN pip install --upgrade pip
@@ -28,7 +30,7 @@ RUN tar -zxvf /bin/geckodriver* -C /bin/
 ENV PATH /bin/geckodriver:$PATH
 
 # add setup.py
-RUN git clone https://gist.github.com/notem/4242fe5c7f8dd6c443cab3d4ca38b85b.git /home/docker/tbb_setup
+RUN git clone https://gist.github.com/websitefingerprinting/b4d306f80aa083508fb4c569c5b27b08.git /home/docker/tbb_setup
 RUN python /home/docker/tbb_setup/setup.py 9.5.3
 
 # Set the display
