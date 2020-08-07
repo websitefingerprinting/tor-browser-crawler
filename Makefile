@@ -28,7 +28,7 @@ VOLUMES = \
 DEVICE=ens33
 
 # commandline arguments
-CRAWL_PARAMS=-c wang_and_goldberg -u ./sites.txt --timeout 2 -s -d ${DEVICE} -v
+CRAWL_PARAMS=-c wang_and_goldberg -u ./sites.txt -s -v
 
 # Make routines
 build:
