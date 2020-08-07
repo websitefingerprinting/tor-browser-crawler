@@ -29,13 +29,14 @@ DEVICE=eth0
 
 # commandline arguments
 CRAWL_PARAMS=-c wang_and_goldberg -u ./sites.txt -s -v
+TAG=tbb
 
 # Make routines
 build:
 	@docker build -t tbcrawl --rm .
 
 run:
-	@docker run -it --rm ${ENV_VARS} ${VOLUMES} --net bridge --privileged \
+	@docker run -it --rm --name ${TAG} ${ENV_VARS} ${VOLUMES} --net bridge --privileged \
 	tbcrawl ${CRAWL_PATH}/Entrypoint.sh "./bin/tbcrawler.py $(CRAWL_PARAMS)" ${DEVICE}
 
 shell:

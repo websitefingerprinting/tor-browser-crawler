@@ -1,4 +1,3 @@
-import os
 from os.path import join, dirname, abspath, pardir
 from time import strftime
 
@@ -15,11 +14,9 @@ STREAM_CLOSE_TIMEOUT = 20  # wait 20 seconds before raising an alarm signal
 # otherwise we had many cases where get_streams hanged
 
 # timeouts
-SOFT_VISIT_TIMEOUT = 60*1     # timeout used by selenium
-HARD_VISIT_TIMEOUT = 80*1     # hard timeout used by process
+SOFT_VISIT_TIMEOUT = 60     # timeout used by selenium
+HARD_VISIT_TIMEOUT = 80     # hard timeout used by process
 
-# write youtube player status and take screenshots every so often
-SCREENSHOT_INTERVAL = 30.      # in seconds
 
 DEFAULT_SOCKS_PORT = 9051
 
