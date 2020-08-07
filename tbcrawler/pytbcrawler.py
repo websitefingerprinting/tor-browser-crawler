@@ -22,6 +22,7 @@ from tbcrawler.log import add_log_file_handler
 from tbcrawler.log import wl_log, add_symlink
 from tbcrawler.torcontroller import TorController
 from tbcrawler.utils import sendmail
+import  datetime
 
 def run():
     # Parse arguments
@@ -70,16 +71,19 @@ def run():
     chdir(cm.CRAWL_DIR)
     try:
         crawler.crawl(job)
+        msg = "'Crawler Message:Crawl done at {}!'".format(datetime.datetime.now())
     except KeyboardInterrupt:
         wl_log.warning("Keyboard interrupt! Quitting...")
         sys.exit(-1)
+    except Exception as e:
+        msg = "'Crawler Message: An error occurred:\n{}'".format(e)
     finally:
         # Post crawl
         post_crawl()
 
         # Close display
         stop_xvfb(xvfb_display)
-
+        sendmail(msg)
     # die
     sys.exit(0)
 
@@ -220,12 +224,4 @@ class TorBrowserWrapper(object):
 
 
 if __name__ == '__main__':
-    try:
-        run()
-        msg = "'Crawler Message:Crawl done at {}!'".format(datetime.datetime.now())
-        sendmail(msg)
-    except KeyboardInterrupt:
-        sys.exit(-1)
-    except Exception as e:
-        msg = "'Crawler Message: An error occurred:\n{}'".format(e)
-        sendmail(msg)
+    run()
