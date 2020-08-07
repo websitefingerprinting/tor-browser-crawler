@@ -1,5 +1,5 @@
 import argparse
-import ConfigParser
+import configparser
 import sys
 import traceback
 from contextlib import contextmanager
@@ -8,8 +8,7 @@ from os import stat, chdir
 from os.path import isfile, join, basename
 from shutil import copyfile
 from sys import maxsize, argv
-from urlparse import urlparse
-import re
+from urllib.parse import urlparse
 
 from selenium.webdriver.common.desired_capabilities import DesiredCapabilities
 from tbselenium.tbdriver import TorBrowserDriver
@@ -92,13 +91,13 @@ def post_crawl():
     pass
 
 
-def build_crawl_dirs(video_file):
+def build_crawl_dirs(site_file):
     # build crawl directory
     ut.create_dir(cm.RESULTS_DIR)
     ut.create_dir(cm.CRAWL_DIR)
     ut.create_dir(cm.LOGS_DIR)
     copyfile(cm.CONFIG_FILE, join(cm.LOGS_DIR, 'config.ini'))
-    copyfile(video_file, join(cm.LOGS_DIR, 'videos.txt'))
+    copyfile(site_file, join(cm.LOGS_DIR, 'sites.txt'))
     add_symlink(join(cm.RESULTS_DIR, 'latest_crawl'), basename(cm.CRAWL_DIR))
 
 
@@ -125,7 +124,7 @@ def parse_url_list(file_path, start, stop):
 
 def parse_arguments():
     # Read configuration file
-    config = ConfigParser.RawConfigParser()
+    config = configparser.RawConfigParser()
     config.read(cm.CONFIG_FILE)
 
     # Parse arguments
@@ -133,8 +132,8 @@ def parse_arguments():
 
     # List of urls to be crawled
     parser.add_argument('-u', '--url-file', required=True,
-                        help='Path to the file that contains the list of video URLs to crawl.',
-                        default=cm.VIDEO_LIST)
+                        help='Path to the file that contains the list of site URLs to crawl.',
+                        default=cm.site_LIST)
     parser.add_argument('-o', '--output',
                         help='Directory to dump the results (default=./results).',
                         default=cm.CRAWL_DIR)
@@ -150,8 +149,8 @@ def parse_arguments():
                         default=False)
     parser.add_argument('-d', '--device', type=str, default='eth0',
                         help='Device interface on which to capture traffic.')
-    parser.add_argument('--timeout', type=int, default=10,
-                        help='Hard timeout (minutes) before video capture is interrupted.')
+    parser.add_argument('--timeout', type=int, default=60,
+                        help='Hard timeout (s) before website capture is interrupted.')
 
     # Crawler features
     parser.add_argument('-x', '--virtual-display',
@@ -180,9 +179,9 @@ def parse_arguments():
     cm.CRAWL_DIR = args.output
     del args.output
 
-    # Change video load timeout
-    cm.HARD_VISIT_TIMEOUT = (args.timeout+1)*60
-    cm.SOFT_VISIT_TIMEOUT = args.timeout*60
+    # Change site load timeout
+    cm.HARD_VISIT_TIMEOUT = args.timeout+20
+    cm.SOFT_VISIT_TIMEOUT = args.timeout
     del args.timeout
 
     wl_log.debug("Command line parameters: %s" % argv)

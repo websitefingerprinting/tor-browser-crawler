@@ -1,4 +1,4 @@
-import commands
+import subprocess
 import os
 import unittest
 
@@ -14,7 +14,7 @@ class Test(unittest.TestCase):
                         Install it by sudo pip install %s' % pkg_name)
 
     def run_cmd(self, cmd):
-        return commands.getstatusoutput('%s ' % cmd)
+        return subprocess.getstatusoutput('%s ' % cmd)
 
     def assert_installed(self, pkg_name, msg=""):
         cmd = 'which %s' % pkg_name

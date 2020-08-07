@@ -4,7 +4,7 @@
 # IMPORTANT: If this file is changed, docker container needs to be rebuilt
 
 # globals
-PYTHON_VERSION='python2.7'
+PYTHON_VERSION='python3.6'
 PYTHON_PATH=`which $PYTHON_VERSION`
 BASE='/home/docker/tbcrawl'
 

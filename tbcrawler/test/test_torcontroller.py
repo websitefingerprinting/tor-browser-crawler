@@ -41,7 +41,7 @@ class TorControllerTest(unittest.TestCase):
         time.sleep(30)
         self.tor_controller.close_all_streams()
         for stream in self.tor_controller.controller.get_streams():
-            print stream.id, stream.purpose, stream.target_address, "open!"
+            print(stream.id, stream.purpose, stream.target_address, "open!")
             streams_open = True
         new_tb_drv.quit()
         self.assertFalse(streams_open, 'Could not close all streams.')

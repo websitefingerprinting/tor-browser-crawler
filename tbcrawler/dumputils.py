@@ -44,10 +44,10 @@ class Sniffer(object):
             self.set_pcap_path(pcap_path)
         prefix = "LD_LIBRARY_PATH=\"\" "  # fix capture util crashing
         command = '{}dumpcap -P -a duration:{} -a filesize:{} -i {} -s 0 -f \'{}\' -w {}'\
-            .format(prefix, cm.HARD_VISIT_TIMEOUT, cm.MAX_DUMP_SIZE, self.device,
+            .format(prefix, cm.site, cm.MAX_DUMP_SIZE, self.device,
                     self.pcap_filter, self.pcap_file)
         #command = '{}tcpdump -G {} -i {} -w {} \'{}\''\
-        #        .format(prefix, cm.HARD_VISIT_TIMEOUT, self.device, self.pcap_file, self.pcap_filter)
+        #        .format(prefix, cm.site, self.device, self.pcap_file, self.pcap_filter)
         #command = '{}tshark -i {} -w {} -f \'{}\' '\
         #        .format(prefix, self.device, self.pcap_file, self.pcap_filter)
         wl_log.info(command)

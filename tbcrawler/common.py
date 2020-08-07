@@ -8,15 +8,15 @@ NUM_INSTANCES = 4
 MAX_SITES_PER_TOR_PROCESS = 100  # reset tor process after crawling 100 sites
 
 # max dumpcap size in KB
-MAX_DUMP_SIZE = 120000
+MAX_DUMP_SIZE = 30000
 # max filename length
 MAX_FNAME_LENGTH = 200
 STREAM_CLOSE_TIMEOUT = 20  # wait 20 seconds before raising an alarm signal
 # otherwise we had many cases where get_streams hanged
 
 # timeouts
-SOFT_VISIT_TIMEOUT = 60*2     # timeout used by selenium
-HARD_VISIT_TIMEOUT = 60*3     # hard timeout used by process
+SOFT_VISIT_TIMEOUT = 60*1     # timeout used by selenium
+HARD_VISIT_TIMEOUT = 80*1     # hard timeout used by process
 
 # write youtube player status and take screenshots every so often
 SCREENSHOT_INTERVAL = 30.      # in seconds
@@ -45,7 +45,7 @@ DEFAULT_TOR_LOG = join(LOGS_DIR, 'tor.log')
 DEFAULT_FF_LOG = join(LOGS_DIR, 'ff.log')
 TEST_DIR = join(SRC_DIR, 'test')
 TBB_DIR = join(BASE_DIR, 'tor-browser_en-US')
-VIDEO_LIST = join(BASE_DIR, "videos.txt")
+SITE_LIST = join(BASE_DIR, "sites.txt")
 
 # PCAP capture filter
 LOCALHOST_IP = "127.0.0.1"  # default localhost IP

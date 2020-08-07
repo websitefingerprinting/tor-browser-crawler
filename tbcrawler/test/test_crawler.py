@@ -4,7 +4,7 @@ import unittest
 from os.path import isfile, isdir
 
 from tbcrawler import common as cm
-from tbcrawler.crawler import VideoCrawler
+from tbcrawler.crawler import Crawler
 
 TEST_URL_LIST = ['https://www.google.de',
                  'https://torproject.org',
@@ -15,7 +15,7 @@ class CrawlerTest(unittest.TestCase):
     @unittest.skip("TODO. skip for now")
     def test_crawl(self):
         # this test takes at least a few minutes to finish
-        crawler = VideoCrawler(cm.TORRC_WANG_AND_GOLDBERG, TEST_URL_LIST,
+        crawler = Crawler(cm.TORRC_WANG_AND_GOLDBERG, TEST_URL_LIST,
                                cm.TBB_DEFAULT_VERSION, capture_screen=True)
         try:
             crawler.crawl(1, 1)  # we can pass batch and instance numbers
