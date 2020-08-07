@@ -65,8 +65,7 @@ class Sniffer(object):
         if timeout < 0:
             raise DumpcapTimeoutError()
         else:
-            wl_log.debug("capture started in %s seconds" %
-                         (DUMPCAP_START_TIMEOUT - timeout))
+            wl_log.debug("capture started in {:.2f} seconds".format(DUMPCAP_START_TIMEOUT - timeout))
 
         self.is_recording = True
 
