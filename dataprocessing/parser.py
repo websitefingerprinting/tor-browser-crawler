@@ -123,8 +123,6 @@ def clean_parse(fdir):
     except Exception as e: 
       print("Error in {}: {}".format(fdir.split('/')[-1], e))
 
-
-
 def burst_parse(fdir):
     global savedir, suffix, ismon
     batch,site,inst = fdir.split("/")[-2].split("_")
@@ -235,7 +233,8 @@ if __name__ == "__main__":
         filelist =  glob.glob(join(args.dir, '*_*_*',captured_file_name))
 
     filename = args.dir.rstrip("/").split("/")[-1]
-    savedir = join(ParsedDir, filename)
+    arg_mode = 'clean' if args.mode else 'burst'
+    savedir = join(ParsedDir, arg_mode+filename)
     init_directories(savedir)
     print("Parsed file in {}".format(savedir))
     print("Totol:{}".format(len(filelist)))
