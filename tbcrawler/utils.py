@@ -9,10 +9,10 @@ from scapy.all import PcapReader, wrpcap
 from tbcrawler.log import wl_log
 import psutil
 from tbcrawler.common import TimeoutException
-from tbcrawler.common import SendMailPyDir
+from tbcrawler.common import SENDMAILPYDIR
 
 def sendmail(msg):
-    cmd = "python3 "+SendMailPyDir+" -m "+msg
+    cmd = "python3 "+SENDMAILPYDIR+" -m "+msg
     subprocess.call(cmd,shell=True)
 
 def create_dir(dir_path):

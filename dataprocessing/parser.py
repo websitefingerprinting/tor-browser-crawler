@@ -29,13 +29,13 @@ def parse_arguments():
                         metavar='<dataset path>',
                         help='Path of dataset.')
     parser.add_argument('--mode','-m',
-                        type=str,
-                        metavar='<parse mode>',
-                        help='The type of dataset: clean, burst?.')
-    parser.add_argument('--type','-t',
-                        action='store_true', 
+                        action='store_true',
                         default=False,
-                        help='The type of dataset: is mon or unmon?.')
+                        help='The type of dataset: clean, burst?(default: clean)')
+    parser.add_argument('--type','-t',
+                        action='store_true',
+                        default=False,
+                        help='The type of dataset: is mon or unmon?(default:unmon)')
     parser.add_argument('-c','--check',
                         action='store_true',
                         default=False,
@@ -217,6 +217,7 @@ def burst_parse(fdir):
 if __name__ == "__main__":
     global savedir, suffix, ismon
     args = parse_arguments()
+    print(args)
     suffix = args.format
     ismon = args.type
     filelist_ = glob.glob(join(args.dir,'*_*_*' ,'screenshot_0.png'))
@@ -240,12 +241,10 @@ if __name__ == "__main__":
     print("Totol:{}".format(len(filelist)))
 
     pool = mp.Pool(processes=15)
-    if args.mode == 'clean':
-        pool.map(clean_parse, filelist)
-    elif args.mode == 'burst':
+    if args.mode:
+        #burst
         pool.map(burst_parse, filelist)
     else:
-        raise ValueError('Wrong mode:{}'.format(args.t))
-
+        pool.map(clean_parse, filelist)
 
 

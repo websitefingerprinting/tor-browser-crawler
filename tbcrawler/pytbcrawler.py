@@ -4,8 +4,8 @@ import sys
 import traceback
 from contextlib import contextmanager
 from logging import INFO, DEBUG
-from os import stat, chdir
-from os.path import isfile, join, basename
+from os import chdir
+from os.path import join, basename
 from shutil import copyfile
 from sys import maxsize, argv
 from urllib.parse import urlparse
@@ -22,8 +22,11 @@ from tbcrawler.log import add_log_file_handler
 from tbcrawler.log import wl_log, add_symlink
 from tbcrawler.torcontroller import TorController
 from tbcrawler.utils import sendmail
-import  datetime
+from tbcrawler.common import PARSERPYDIR
+from tbcrawler.log import wl_log
 
+import  datetime
+import subprocess
 def run():
     # Parse arguments
     args, config = parse_arguments()
@@ -79,7 +82,8 @@ def run():
         msg = "'Crawler Message: An error occurred:\n{}'".format(e)
     finally:
         # Post crawl
-        post_crawl()
+        if args.parse:
+            post_crawl(cm.CRAWL_DIR, args.m, args.t)
 
         # Close display
         stop_xvfb(xvfb_display)
@@ -88,12 +92,16 @@ def run():
     sys.exit(0)
 
 
-def post_crawl():
+def post_crawl(crawl_dir, mode, t):
     """Operations after the crawl."""
     # TODO: pack crawl
     # TODO: sanity checks
-    pass
-
+    arg_mode = " -m " if mode else " "
+    arg_t = " -t " if t else " "
+    arg_c = " -c " if not mode else " " #check screenshot when crawl clean dataset
+    cmd = "python3 "+ PARSERPYDIR + " --dir " + crawl_dir + arg_mode + arg_t + arg_c
+    wl_log.info(cmd)
+    subprocess.call(cmd,shell=True)
 
 def build_crawl_dirs(site_file):
     # build crawl directory
@@ -172,6 +180,18 @@ def parse_arguments():
                         help='Select URLs after this line number: (default: EOF).',
                         default=maxsize)
 
+    parser.add_argument('--parse','-p',
+                        help='Parse the traffic after a crawl.',
+                        action='store_true',
+                        default=False)
+    parser.add_argument('--mode','-m',
+                        action='store_true',
+                        default=False,
+                        help='The type of dataset: clean, burst?(default: clean)')
+    parser.add_argument('--type','-t',
+                        action='store_true',
+                        default=False,
+                        help='The type of dataset: is mon or unmon?(default:unmon)')
     # Parse arguments
     args = parser.parse_args()
 
