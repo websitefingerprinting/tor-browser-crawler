@@ -97,9 +97,9 @@ class CrawlJob(object):
         self.visits = int(config['visits'])
         self.batches = int(config['batches'])
         self.config = config
-
+        self.start_id = start_id
         # state
-        self.site = start_id
+        self.site =  0
         self.visit = 0
         self.batch = 0
 
@@ -121,7 +121,7 @@ class CrawlJob(object):
 
     @property
     def path(self):
-        attributes = [self.batch, self.site, self.instance]
+        attributes = [self.batch, self.site+self.start_id, self.instance]
         return join(cm.CRAWL_DIR, "_".join(map(str, attributes)))
 
     def png_file(self, time):
