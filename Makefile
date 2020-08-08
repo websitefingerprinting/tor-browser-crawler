@@ -8,6 +8,8 @@ XAUTH=/tmp/.docker.xauth
 # paths
 TBB_PATH=/home/docker/tbcrawl/tor-browser_en-US/
 CRAWL_PATH=/home/docker/tbcrawl
+DPBURST_PATH=/home/docker/dpburst
+RANDOM_WT_PATH=/home/docker/random_wt
 GUEST_SSH=/home/docker/.ssh
 HOST_SSH=${HOME}/.ssh
 
@@ -22,8 +24,8 @@ VOLUMES = \
 	--volume=${XAUTH}:${XAUTH}					\
 	--volume=${HOST_SSH}:${GUEST_SSH}			\
 	--volume=`pwd`:${CRAWL_PATH}				\
-
-
+	--volume=${HOME}/adaptiveBurstPadding:${DPBURST_PATH}	\
+	--volume=${HOME}/walkietalkie:${RANDOM_WT_PATH}	        \
 # network interface on which to listen
 DEVICE=eth0
 
