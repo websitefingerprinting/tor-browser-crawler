@@ -31,8 +31,20 @@ DEVICE=eth0
 
 tag=tbb
 # commandline arguments
-# CRAWL_PARAMS=-c wang_and_goldberg -u ./sites.txt -s -v -p -t --stop 100 
-CRAWL_PARAMS=-c dpburst -u ./sites.txt -s -v -p --stop 100 
+
+## mon sites
+## undefended
+# CRAWL_PARAMS=-c wang_and_goldberg -u ./sites/sites.txt -s -v -p -t --stop 100
+## DP-Burst
+# CRAWL_PARAMS=-c dpburst -u ./sites/sites.txt -s -v -p -t -m --stop 100
+# CRAWL_PARAMS=-c random_wt -u ./sites/sites.txt -s -v -p -t -m --stop 100
+
+#unmon sites
+## undefended
+# CRAWL_PARAMS=-c wang_and_goldberg -u ./sites/unmon_sites.txt -s -v -p --stop 10000
+## DP-Burst
+# CRAWL_PARAMS=-c dpburst -u ./sites/unmon_sites.txt -s -v -p -m --stop 10000
+# CRAWL_PARAMS=-c random_wt -u ./sites/unmon_sites.txt -s -v -p -m --stop 10000
 
 # Make routines
 build:
