@@ -83,7 +83,7 @@ def run():
     finally:
         # Post crawl
         if args.parse:
-            post_crawl(cm.CRAWL_DIR, args.m, args.t)
+            post_crawl(cm.CRAWL_DIR, args.m, args.type)
 
         # Close display
         stop_xvfb(xvfb_display)
