@@ -31,8 +31,8 @@ DEVICE=eth0
 
 tag=tbb
 # commandline arguments
-CRAWL_PARAMS=-c wang_and_goldberg -u ./sites.txt -s -v
-
+# CRAWL_PARAMS=-c wang_and_goldberg -u ./sites.txt -s -v -p -t --stop 100 
+CRAWL_PARAMS=-c dpburst -u ./sites.txt -s -v -p --stop 100 
 
 # Make routines
 build:
