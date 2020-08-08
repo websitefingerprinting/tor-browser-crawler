@@ -92,14 +92,14 @@ class Crawler(object):
 
 
 class CrawlJob(object):
-    def __init__(self, config, urls):
+    def __init__(self, config, urls, start_id):
         self.urls = urls
         self.visits = int(config['visits'])
         self.batches = int(config['batches'])
         self.config = config
 
         # state
-        self.site = 0
+        self.site = start_id
         self.visit = 0
         self.batch = 0
 
