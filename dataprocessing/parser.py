@@ -233,8 +233,8 @@ if __name__ == "__main__":
         filelist =  glob.glob(join(args.dir, '*_*_*',captured_file_name))
 
     filename = args.dir.rstrip("/").split("/")[-1]
-    arg_mode = 'clean' if args.mode else 'burst'
-    savedir = join(ParsedDir, arg_mode+filename)
+    arg_mode = 'clean' if not args.mode else 'burst'
+    savedir = join(ParsedDir, arg_mode+"_"+filename)
     init_directories(savedir)
     print("Parsed file in {}".format(savedir))
     print("Totol:{}".format(len(filelist)))
