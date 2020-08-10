@@ -59,7 +59,7 @@ shell:
 	tbcrawl /bin/bash
 
 clean:
-	@sudo rm -r ./dump/*
+	@sudo rm -r ./results/*
 	@sudo rm -r ./parsed/*
 stop:
 	@docker stop `docker ps -a -q -f ancestor=tbcrawl`
