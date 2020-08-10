@@ -24,7 +24,7 @@ VOLUMES = \
 	--volume=${XAUTH}:${XAUTH}					\
 	--volume=${HOST_SSH}:${GUEST_SSH}			\
 	--volume=`pwd`:${CRAWL_PATH}				\
-	--volume=${HOME}/adaptiveBurstPadding:${DPBURST_PATH}	\
+	--volume=${HOME}/DP-Burst:${DPBURST_PATH}	\
 	--volume=${HOME}/walkietalkie:${RANDOM_WT_PATH}	        \
 # network interface on which to listen
 DEVICE=eth0
