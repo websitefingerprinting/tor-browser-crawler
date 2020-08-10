@@ -30,6 +30,8 @@ class Crawler(object):
 
     def post_visit(self):
         guard_ips = set([ip for ip in self.controller.get_all_guard_ips()])
+        #hard-coded bridge ips, used when we set up our own bridges
+        guard_ips.update(cm.My_Bridge_Ips)
         wl_log.debug("Found %s guards in the consensus.", len(guard_ips))
         wl_log.info("Filtering packets without a guard IP.")
         try:

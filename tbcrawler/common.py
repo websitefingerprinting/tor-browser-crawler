@@ -48,6 +48,9 @@ SITE_LIST = join(BASE_DIR, "sites.txt")
 LOCALHOST_IP = "127.0.0.1"  # default localhost IP
 DEFAULT_FILTER = 'tcp and not host %s and not tcp port 22 and not tcp port 20' % LOCALHOST_IP
 
+#Hard-coded bridge IP
+My_Bridge_Ips = ['13.75.78.82', '52.175.31.228', '23.100.88.30','40.83.88.194']
+
 SENDMAILPYDIR = join(BASE_DIR, "private/sendmail.py")
 PARSERPYDIR = join(BASE_DIR, "dataprocessing/parser.py")
 class TimeoutException(Exception):
