@@ -210,7 +210,7 @@ def burst_parse(fdir):
             for pkt in total_pkts0:
                 f.write("{:.6f}\t{:.0f}\n".format(pkt[0],pkt[1])) 
     except Exception as e: 
-        print("Error in {}: {}".format(fdir.split('/')[-1], e))
+        print("Error in {}: {}".format(fdir, e))
 
 if __name__ == "__main__":
     global savedir, suffix, ismon
