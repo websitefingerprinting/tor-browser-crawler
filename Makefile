@@ -58,6 +58,9 @@ shell:
 	@docker run -it --rm ${ENV_VARS} ${VOLUMES} --net bridge --privileged \
 	tbcrawl /bin/bash
 
+clean:
+	@sudo rm -r ./dump/*
+	@sudo rm -r ./parsed/*
 stop:
 	@docker stop `docker ps -a -q -f ancestor=tbcrawl`
 	@docker rm `docker ps -a -q -f ancestor=tbcrawl`
